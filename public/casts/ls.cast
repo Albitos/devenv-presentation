@@ -1,0 +1,8 @@
+{"version": 2, "width": 156, "height": 43, "timestamp": 1727510814, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.178848, "o", "\u001b[?2004h\u001b[97mBASH\u001b[0m \u001b[1;95m\u001b[0m\u001b[1;95mnix-shell-env\u001b[0m \u001b[1;36m~/Projects/presentations/devbox/devbox\u001b[0m \u001b[1;92m$\u001b[0m "]
+[4.314284, "o", "l"]
+[4.327813, "o", "s"]
+[4.440311, "o", "\r\n\u001b[?2004l\r"]
+[4.479909, "o", "\u001b[0m\u001b[01;34mcomponents\u001b[0m  \u001b[01;34mdist\u001b[0m  ls  netlify.toml  \u001b[01;34mnode_modules\u001b[0m  package.json  \u001b[01;34mpages\u001b[0m  \u001b[01;34mpublic\u001b[0m  README.md  slides.md  \u001b[01;34msnippets\u001b[0m  vercel.json  yarn.lock\r\n"]
+[4.507573, "o", "\u001b[?2004h\u001b[97mBASH\u001b[0m \u001b[1;95m\u001b[0m\u001b[1;95mnix-shell-env\u001b[0m \u001b[1;36m~/Projects/presentations/devbox/devbox\u001b[0m \u001b[1;92m$\u001b[0m "]
+[5.092653, "o", "\u001b[?2004l\r\r\nexit\r\n"]
