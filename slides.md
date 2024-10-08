@@ -1,11 +1,6 @@
 ---
-# You can also start simply with 'default'
-theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Easy development environments with Nix & Devbox
+theme: default
+title: Easy development environments with Nix
 info: |
   ## Slidev Starter Template
   Presentation slides for developers.
@@ -20,60 +15,37 @@ drawings:
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
+lineNumbers: true
 addons:
   - slidev-addon-asciinema
 ---
 
-# Hello!
+# <img src="/images/nix-logo.svg" class="nix-logo" style="display: inline; width: 200px; position: relative; top: -10px;" alt="Nix logo"> + <img src="/images/devenv-dark-bg.svg" class="devenv-logo" style="position: relative; display: inline; width: 200px" alt="Slidev logo"> = ❤️
+ 
 
-## Who am I?
+## Portable local development environments with Nix
 
-Presentation slides for developers
-
-<div class="pt-12">
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
-  </span>
-</div>
-
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub" title="Open in GitHub"
-    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
-</div>
+How to make sure that you local environment<br>is consistent across the team<br> and easy to set up? 
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
 ---
-transition: fade-out
+transition: slide-left
 layout: two-cols
 layoutClass: gap-16
 ---
 
 # Who am I?
 
-- Wielki fan finansów, Open-Source i technologii
-- Lubię grać w gry (zarówno te cyfrowe, jak i analogowe)
-- i oglądam zdecydowanie zbyt dużo seriali ;)
-- Ponad 16 lat doświadczenia przy tworzeniu projektów webowych
-- Kiedyś co-founder i CTO w małym start-upie
-- Obecnie Team Lead @<img src="/images/monday.svg" class="monday-logo" style="display: inline; width: 200px" alt="monday.com logo">
-- Mam obsesję na punkcie produktywności i jakości oprogramowania (w tej kolejności)
+- Team Lead @<img src="/images/monday.svg" class="monday-logo" style="display: inline; width: 200px" alt="monday.com logo">
+- Over 16 years of commercial experience in programming. 
+- I have an obsession with productivity and code quality (in that order).
 
 ::right::
 
 <img src="/images/photo.jpg" class="photo">
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
@@ -92,560 +64,710 @@ h1 {
 }
 </style>
 
-<!--
-Here is another comment.
--->
 
 ---
 transition: slide-up
+layout: two-cols
 level: 2
 ---
 
-# Navigation
+# Let’s talk about DevEx
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
+It’s about removing all the roadblocks that stop you from working efficiently (also known as: bullsh*t).
 
-## Keyboard Shortcuts
+The very first thing that you encounter in a new company/project is the local env setup. 
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
+Especially important when working with Microservices.
 
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+But not only - for example, freelancers encounter this as well a lot when switching between projects. 
+
+Did you ever come back to a project after 5 years?
+
+I did. 
+
+It. Is. Not. Fun.
+
+:: right ::
+
+<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
+    <source src="/images/blocks-wrecked.mp4" type="video/mp4">
+</SlidevVideo>
+
+
+---
+layout: two-cols-header
+transition: slide-up
+layoutClass: gap-x-8 gap-16
+---
+
+# Let’s talk about DevEx
+
+You join a new project. Or even worse, an old one. What do you need to do?
+
+::left::
+
+Just starting a job at a new company?
+
+> You will need git, docker, docker-compose, node, kubectl, vscode, company dotfiles.
+
+Install tooling (new/old version of node?)
+
+> Actually, it’s 4 different versions of node. And Ruby. And go. Oh, did I mention Scala? <b>It’s a Zoo out there.</b>
+
+::right::
+
+<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
+    <source src="/images/madagascar.mp4" type="video/mp4">
+</SlidevVideo>
+
+
+---
+layout: two-cols-header
+transition: slide-left
+layoutClass: gap-x-8
+---
+
+# Let’s talk about DevEx
+
+You join a new project. Or even worse, an old one. What do you need to do?
+
+::left::
+
+Oh no, libsass won’t compile due to old Python 
+
+> There’s a docker-compose.yml, we are golden!
+
+But where do I get the env variables from?
+
+> There’s env.local.example. Copy it and fill in with your values.
+
+It’s outdated… Also, are the database seeds loaded automatically?
+
+> NOPE!
+
+ALL of that work is unnecessary and a waste of your time. And puts a lot of pressure on new joiners.
+
+::right::
+
+<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
+    <source src="/images/aletter.mp4" type="video/mp4">
+</SlidevVideo>
+
+
+---
+layout: two-cols-header
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# Let’s solve it!
+It’s simple, just create a script that installs all the required tools. Right?
+
+::left::
+
+<v-click>
+This single team is using Scala? 
+
+> Do we want to install Scala for everyone?
+</v-click>
+<br>
+<v-click>
+You need two different versions of OpenSSL for different projects? 
+
+> Yeah, we can’t have that
+</v-click>
+<br>
+<v-click>
+Coming back after a year or two? 
+
+> New OS X has now Python 3, so the script fails
+</v-click>
+<br>
+<v-click>
+Our new team member is using Windows? 
+
+> Oh, we need to rewrite the script
+</v-click>
+
+::right::
+
+<v-click>
+<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
+    <source src="/images/oh-come-on.mp4" type="video/mp4">
+</SlidevVideo>
+</v-click>
 
 ---
 layout: two-cols
-layoutClass: gap-16
+transition: slide-up
+layoutClass: gap-x-8
 ---
 
-# Table of contents
+# Let’s solve it - attempt #2
 
-You can use the `Toc` component to generate a table of contents for your slides:
+Ok, how about containers?
 
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
+
+<v-click>
+1. Create a Dockerfile per project
+
+  - Solves the pre-existing libraries / tools issue
+  - No more version conflicts between projects
+</v-click>
+
+<v-click>
+
+2. Install all tools within the container
+
+</v-click>
+
+<v-click>
+
+3. Create a docker-compose.yml with services
+
+</v-click>
+
+<v-click>
+
+4. Mount local files as volumes
+  - Now we can use our IDE to edit files directly
+
+</v-click>
+
+<v-click>
+5. Use .env.local + env variables in docker-compose.yml
+</v-click>
+
+<h3 v-click class="text-center" style="margin-top: 30px;">
+DONE!
+</h3>
+
+::right::
+
+<div v-click="1" v-click.hide="3">
+```docker {1-16|3}{at:2}
+FROM node:20-alpine
+
+RUN apk add git diff nano zsh httpie
+
+RUN mkdir -p /home/node/app/node_modules && \
+chown -R node:node /home/node/app
+
+WORKDIR /home/node/app
+COPY package*.json ./
+
+USER node
+RUN npm install
+COPY --chown=node:node . .
+EXPOSE 8080
+
+CMD [ "node", "app.js" ]
+
 ```
-<Asciinema src="casts/ls.cast" :playerProps="{speed: 2, rows: 23}"/>
+</div>
 
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
+<div v-click="3">
+```yaml {3,17-23|12-13|7,23|all}{at: 4}
+version: '3'
+
+services:
+  node-app:
+    build: .
+    image: node-app
+    env_file: ".env.local"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    networks:
+      - node-network
+    command: npm run dev
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    env_file: ".env.local"
+```
+</div>
+
+
+<style>
+ul {
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #ffffffaa; 
+}
+.slidev-vclick-hidden .slidev-code-wrapper {
+  display: none;
+}
+
+</style>
+
+
+---
+layout: two-cols-header
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# Let’s solve it - attempt #2
+
+Or are we?
+
+
+1. Now all tools can be used only in the container
+2. If you want them available everywhere, each container needs to have them installed
+3. Adding a tool will require rebuilding everything
+4. If the distribution doesn't contain a package for your tool, you are in for a lot of pain
+5. Docker builds aren't really reproducible
+6. We can't install GUI applications that way
+7. It's not easy to use one's own shell configuration
+
+<!-- TODO: FIXME: improve this slide --->
+
+
+<style>
+ul {
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #ffffffaa; 
+}
+</style>
+
+
+
+---
+layout: section
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# We are doomed
+
+There is no solution. We just need to suffer.
+
+<div class="flex flex-col items-center">
+<SlidevVideo autoplay loop autoreset="click" class="text-center">
+    <source src="/images/fire.mp4" type="video/mp4">
+</SlidevVideo>
+</div>
+
+<h4 v-click class="text-center" style="margin-top: 30px;">
+Well, not really. We wouldn’t be here otherwise.
+</h4>
+
+
+---
+layout: default
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# So, how does a perfect solution look like?
+
+Let's be unreasonable. We want to have everything!
+
+1. Single stop shop for all tools, libraries and configuration
+2. Needs to be a part of project's repository
+3. Reproducible builds
+4. Fast setup
+5. Works everywhere
+6. Allows for running GUI applications
+7. Doesn't cause conflicts with other projects
+8. Ages slowly, like a fine wine
+9. Easy to use for everyone
+
+
+---
+layout: two-cols-left
+transition: slide-up
+leftColSpan: 7
+layoutClass: gap-x-8
+---
+
+# Enter Nixpkgs
+
+What is it?
+
+::left::
+
+- I will be crucified for this, but basically “npm” for system packages with some really nice extra features:
+reproducible builds
+- declarative configuration in a single, type-safe format (Nix language)
+- It uses Nix store underneath
+- Over 100,000 packages available. More than Arch btw.
+- Anything that you could apt-get is there: vscode, node, firefox, docker.
+- There is a whole Linux distribution built around it (NixOS), but we won’t be talking about it. You can read more about it here:
+
+ 
+
+<br><br>
+Project website: https://nixos.org
+
+YouTube VimJoyer NixOS series: [youtube.com/@vimjoyer](https://www.youtube.com/playlist?list=PLko9chwSoP-15ZtZxu64k_CuTzXrFpxPE)
+
+::right::
+
+<center>
+<img src="/images/nix-logo.svg" class="nix-logo" style="display: inline; width: 200px;" alt="Nix logo">
+</center>
+
+---
+layout: two-cols
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# So how do we use it?
+
+It’s simple:
+
+1. Learn the Nix language
+2. Understand how modules, packages and Flakes work
+3. Create your own Nix flake
+4. Run single shell command:
+   > <code>nix shell .#dev --command 'dev-shell'</code>
+5. Launch your services 
+
+<h4 v-click class="text-center" style="margin-top: 30px;">
+I'm kidding. It's not simple...
+
+Might not be such a bad idea,<br>if you are the only person using it. 
+
+<b>But that’s probably not the case.</b>
+
+</h4>
+
+
+::right::
+
+<div style="margin-top: -35px">
+</div>
+```nix
+{
+  description = "A Nix-flake-based Node.js development environment";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+  };
+
+  outputs = { self , nixpkgs ,... }: let
+    system = "x86_64-darwin";
+  in {
+    packages."${system}".dev = let
+      pkgs = import nixpkgs { inherit system; };
+      packages = with pkgs; [
+          nodejs_20
+          nodePackages.npm
+          postgresql_15
+          nushell
+      ];
+    in pkgs.runCommand "dev-shell" {
+      buildInputs = packages;
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+    } ''
+      mkdir -p $out/bin/
+      ln -s ${pkgs.nushell}/bin/nu $out/bin/dev-shell
+      wrapProgram $out/bin/dev-shell --prefix PATH : ${pkgs.lib.makeBinPath packages}
+    '';
+  };
+}
+```
+
+
+---
+layout: two-cols-left
+transition: slide-up
+leftColSpan: 7
+layoutClass: gap-x-8
+---
+
+# devenv.sh - what is it?
+
+It's a tool that can:
+
+::left::
+
+1. Manage installed software, such as node, npm, postgresql, vscode
+2. Handle configuration of all installed packages
+3. Define environment variables
+4. Run tasks, e.g. import database seed, migrate schema
+5. Manage git hooks
+6. Load/Unload everything automatically by using direnv
+7. Build containers out of our local environment
+
+<v-click>
+<h4 class="text-center" style="margin-top: 30px;">
+All of that from a type-safe, declarative, single configuration file
+</h4>
+</v-click>
 
 
 
 ::right::
 
-<Toc v-click minDepth="1" maxDepth="2"></Toc>
+<center>
+<img src="/images/devenv-dark-bg.svg" class="devenv-logo" style="position: relative; display: inline; width: 200px" alt="Slidev logo">
+</center>
+
 
 ---
-layout: image-right
-image: https://cover.sli.dev
+layout: two-cols
+transition: slide-up
+leftColSpan: 7
+layoutClass: gap-x-8
 ---
 
-# Code
+# Let’s try devenv.sh
 
-Use code snippets and get the highlighting directly, and even types hover!
+Installation & initialization:
 
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
+<v-click>
+1. Starting from a clean slate. Nothing is installed, just a Linux VM
+</v-click>
+<br><br>
+<v-click>
+2. Install Nix:
 
-import { computed, ref } from 'vue'
+> sh curl https://nixos.org/nix/install | sh
+</v-click>
+<br>
+<v-click>
+3. Install devenv: 
 
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
+> nix profile install --accept-flake-config nixpkgs#devenv
+</v-click>
+<br>
+<v-click>
+4. Init new project:
 
-doubled.value = 2
-```
+> devenv init
 
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
+Some files were automatically created for us: <i>.envrc</i>, <i>devenv.nix</i>, <i>devenv.yaml</i>, <i>.gitignore</i>
+</v-click>
 
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
+::right::
 
-<!-- Footer -->
+<div style="position: relative">
+<Asciinema src="casts/recording.rec" :playerProps="{  controls: false, theme: 'auto/dracula', preload: true, idleTimeLimit: 2}"/>
+</div>
 
-[Learn more](https://sli.dev/features/line-highlighting)
+---
+layout: default
+transition: slide-up
+layoutClass: gap-x-8
+---
 
-<!-- Inline style -->
+# It's ready. Now what?
+
+Now we can use devenv CLI:
+- <span>devenv shell</span> - enter your local environment
+- <span>devenv up</span>  - start services (e.g. postgresql)
+- <span>devenv test</span>  - run tests and git hooks
+- <span>devenv update</span>  - update your packages and save lockfile
+- <span>devenv gc</span>  - clean unused packages
+
+
+
+
+<h4 v-click class="text-center" style="margin-top: 30px;">
+Wait, but there is no <span>devenv install</span>. How do I add a package???
+</h4>
+
 <style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
+span {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 14px;
+  color: gray;
+  background: rgba(255,255,255,0.1);
 }
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
+li {
+margin-top: 3px;
 }
 </style>
 
-<!--
-Notes can also sync with clicks
 
-[click] This will be highlighted after the first click
 
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
 
 ---
-level: 2
+layout: two-cols
+transition: slide-up
+layoutClass: gap-x-8
 ---
 
-# Shiki Magic Move
+# Use the config, Luke
 
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
+Everything you need is in the devenv.nix file
 
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
+Wait, that’s all? 
 
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
+> Yes, as long as you want Node.js.
 
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
+<br>
+<v-click>
+What about bun?
 
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
+> No problem!
+</v-click>
 
 <br>
 
-<v-click>
+<v-click at="4">
 
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
+> Now we can execute <span>devenv shell</span> and have everything set up for us.<br><br> 
+> Try executing <span>node --version</span>, <span>bun --version</span> or <span>npm --version</span>
 
 </v-click>
 
-<div mt-20 v-click>
 
-[Learn more](https://sli.dev/guide/animations#click-animation)
+::right::
 
-</div>
-
----
-
-# Motions
-
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
-
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
+````md magic-move 
+<<< @/snippets/devenv.nix#languages nix
+<<< @/snippets/devenv.nix#bun nix {5}
+````
 <br>
 
-###### Directive Usage
+<div style="position: relative">
+<Asciinema src="casts/recording.rec" :playerProps="{ startAt: '1:43', autoPlay: false, controls: true, theme: 'auto/dracula', preload: true}"/>
+</div>
 
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
+<style>
+.ap-terminal {
+  border-color: transparent !important;
+  border-width: 0 !important;
+  background: rgba(0,0,0,0.5);
+}
 
+span {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 14px;
+  color: gray;
+  background: rgba(255,255,255,0.1);
+}
+</style>
+
+
+
+---
+layout: default
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# Let’s add some env variables...
+
+It's just another option in devenv.nix:
+
+<div style="width: 700px;">
+<<< @/snippets/devenv.nix#env nix
+
+</div>
 <br>
 
-###### Component Usage
+<img src="/images/env.png" style="width: 700px;"/>
 
-```md
-<v-drag text-3xl>
-  <carbon:arrow-up />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
 
-<v-drag pos="436,235,261,_,-15"undefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefinedundefined>
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="127,435,253,46" two-way op70 />
 
 ---
-src: ./pages/imported-slides.md
-hide: false
+layout: two-cols-header
+transition: slide-up
+layoutClass: gap-x-8
 ---
 
----
+# ...and services,
 
-# Monaco Editor
+There are plenty of predefined ones:
 
-Slidev provides built-in Monaco Editor support.
 
-Add `{monaco}` to the code block to turn it into an editor:
+::left::
 
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
+<img src="/images/services.png" style="min-width:450px"/>
 
-const arr = ref(emptyArray(10))
-```
+::right::
 
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
+<div style="max-width: 100%">
 
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
+<<< @/snippets/devenv.nix#services nix 
 
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
+</div>
+
 
 ---
-layout: center
-class: text-center
+layout: two-cols-header
+transition: slide-up
+layoutClass: gap-x-8
 ---
 
-# Learn More
+# ...and hooks with linters.
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+devenv.sh supports many of them out of the box:
 
-<PoweredBySlidev mt-10 />
+::left::
+<<< @/snippets/devenv.nix#hooks nix
+
+
+
+::right::
+
+<img src="/images/hooks.png" style="width: 700px;"/>
+
+
+
+
+
+---
+layout: two-cols-header
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# What about database migrations?
+
+We can create arbitrary tasks and define when they run:
+
+::left::
+
+<div style="margin-top: -100px"></div>
+
+<<< @/snippets/devenv.nix#tasks nix
+
+::right::
+
+
+<div style="margin-top: -100px"></div>
+
+<img src="/images/tasks.png" style="width: 700px;"/>
+
+
+---
+layout: section
+transition: slide-up
+layoutClass: gap-x-8
+---
+
+# Well, that was easy!
+
+Doomsday avoided. Our local env is amazing now.
+
+<br>
+<div class="flex flex-col items-center" style="width:400px; margin: auto;">
+<SlidevVideo autoplay loop autoreset="click" class="text-center">
+    <source src="/images/easy.mp4" type="video/mp4">
+</SlidevVideo>
+</div>
+
+<h4 v-click class="text-center" style="margin-top: 30px;">
+Questions?
+</h4>
+
+
+
