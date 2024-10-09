@@ -578,8 +578,28 @@ Well, not really. We wouldn’t be here otherwise.
 </h4>
 
 
+<!--
+
+
+# We are doomed
+
+There is no solution. We just need to suffer.
+
+<div class="flex flex-col items-center">
+<SlidevVideo autoplay loop autoreset="click" class="text-center">
+    <source src="/images/fire.mp4" type="video/mp4">
+</SlidevVideo>
+</div>
+
+[click] <h4 class="text-center" style="margin-top: 30px;">
+Well, not really. We wouldn’t be here otherwise.
+</h4>
+
+
+-->
+
 ---
-layout: default
+layout: two-cols-header
 transition: slide-up
 layoutClass: gap-x-8
 ---
@@ -588,15 +608,93 @@ layoutClass: gap-x-8
 
 Let's be unreasonable. We want to have everything!
 
+
+::left::
+
+<p>
 1. Single stop shop for all tools, libraries and configuration
+</p>
+
+<v-click>
+<p>
 2. Needs to be a part of project's repository
+</p>
+</v-click>
+
+<v-click>
+<p>
 3. Reproducible builds
+</p>
+</v-click>
+
+<v-click>
+<p>
 4. Fast setup
+</p>
+</v-click>
+
+<v-click>
+<p>
 5. Works everywhere
+</p>
+</v-click>
+
+<v-click>
+<p>
 6. Allows for running GUI applications
+</p>
+</v-click>
+
+<v-click>
+<p>
 7. Doesn't cause conflicts with other projects
+</p>
+</v-click>
+
+<v-click>
+<p>
 8. Ages slowly, like a fine wine
+</p>
+</v-click>
+
+<v-click>
+<p>
 9. Easy to use for everyone
+</p>
+</v-click>
+
+::right::
+
+
+<SlidevVideo autoplay loop autoreset="click" style="max-height: 400px; width: 100%;">
+    <source src="/images/daydream.mp4" type="video/mp4">
+</SlidevVideo>
+
+
+<!--
+
+So, how does a perfect solution look like?
+
+1. Single stop shop for all tools, libraries and configuration
+
+[click] 2. Needs to be a part of project's repository
+
+[click] 3. Reproducible builds
+
+[click] 4. Fast setup
+
+[click] 5. Works everywhere
+
+[click] 6. Allows for running GUI applications
+
+[click] 7. Doesn't cause conflicts with other projects
+
+[click] 8. Ages slowly, like a fine wine
+
+[click] 9. Easy to use for everyone
+
+
+-->
 
 
 ---
@@ -748,13 +846,48 @@ It's a tool that can:
 
 ::left::
 
+
+<v-click>
+<p>
 1. Manage installed software, such as node, npm, postgresql, vscode
+</p>
+</v-click>
+
+<v-click>
+<p>
 2. Handle configuration of all installed packages
+</p>
+</v-click>
+
+<v-click>
+<p>
 3. Define environment variables
+</p>
+</v-click>
+
+<v-click>
+<p>
 4. Run tasks, e.g. import database seed, migrate schema
+</p>
+</v-click>
+
+<v-click>
+<p>
 5. Manage git hooks
+</p>
+</v-click>
+
+<v-click>
+<p>
 6. Load/Unload everything automatically by using direnv
+</p>
+</v-click>
+
+<v-click>
+<p>
 7. Build containers out of our local environment
+</p>
+</v-click>
 
 <v-click>
 <h4 class="text-center" style="margin-top: 30px;">
@@ -771,6 +904,36 @@ All of that from a type-safe, declarative, single configuration file
 </center>
 
 
+<!--
+
+
+devenv.sh - what is it?
+
+It's a tool that can:
+
+
+[click] 1. Manage installed software, such as node, npm, postgresql, vscode
+
+[click] 2. Handle configuration of all installed packages
+
+[click] 3. Define environment variables
+
+[click] 4. Run tasks, e.g import database seed, migrate schema
+
+[click] 5. Manage git hooks
+
+[click] 6. Load/Unload everything automatically by using direnv
+
+[click] 7. Build containers out of our local environment
+
+[click] <h4 class="text-center" style="margin-top: 30px;">
+All of that from a type-safe, declarative, single configuration file
+</h4>
+
+
+-->
+
+
 ---
 layout: two-cols
 transition: slide-up
@@ -782,9 +945,7 @@ layoutClass: gap-x-8
 
 Installation & initialization:
 
-<v-click>
 1. Starting from a clean slate. Nothing is installed, just a Linux VM
-</v-click>
 <br><br>
 <v-click>
 2. Install Nix:
@@ -817,6 +978,33 @@ Some files were automatically created for us: <i>.envrc</i>, <i>devenv.nix</i>, 
 
 </div>
 
+<!--
+
+Let’s try devenv.sh
+
+Installation & initialization:
+
+1. Starting from a clean slate. Nothing is installed, just a Linux VM
+
+[click] 2. Install Nix:
+
+> sh curl https://nixos.org/nix/install | sh
+
+[click] 3. Install devenv: 
+
+> nix profile install --accept-flake-config nixpkgs#devenv
+
+[click] 4. Init new project:
+
+> devenv init
+
+Some files were automatically created for us: <i>.envrc</i>, <i>devenv.nix</i>, <i>devenv.yaml</i>, <i>.gitignore</i>
+</v-click>
+
+-->
+
+
+
 ---
 layout: default
 transition: slide-up
@@ -831,9 +1019,6 @@ Now we can use devenv CLI:
 - <span>devenv test</span>  - run tests and git hooks
 - <span>devenv update</span>  - update your packages and save lockfile
 - <span>devenv gc</span>  - clean unused packages
-
-
-
 
 <h4 v-click class="text-center" style="margin-top: 30px;">
 Wait, but there is no <span>devenv install</span>. How do I add a package???
@@ -852,7 +1037,22 @@ margin-top: 3px;
 }
 </style>
 
+<!--
 
+# It's ready. Now what?
+
+Now we can use devenv CLI:
+- <span>devenv shell</span> - enter your local environment
+- <span>devenv up</span>  - start services (e.g. postgresql)
+- <span>devenv test</span>  - run tests and git hooks
+- <span>devenv update</span>  - update your packages and save lockfile
+- <span>devenv gc</span>  - clean unused packages
+
+[click] <h4 class="text-center" style="margin-top: 30px;">
+Wait, but there is no <span>devenv install</span>. How do I add a package???
+</h4>
+
+-->
 
 
 ---
@@ -870,7 +1070,7 @@ Wait, that’s all?
 > Yes, as long as you want Node.js.
 
 <br>
-<v-click>
+<v-click at="1">
 What about bun?
 
 > No problem!
@@ -878,7 +1078,7 @@ What about bun?
 
 <br>
 
-<v-click at="4">
+<v-click at="2">
 
 > Now we can execute <span>devenv shell</span> and have everything set up for us.<br><br> 
 > Try executing <span>node --version</span>, <span>bun --version</span> or <span>npm --version</span>
@@ -930,6 +1130,7 @@ Wait, that’s all?
 
 > No problem!
 
+[click]
 > Now we can execute <span>devenv shell</span> and have everything set up for us.<br><br> 
 > Try executing <span>node --version</span>, <span>bun --version</span> or <span>npm --version</span>
 
@@ -953,7 +1154,20 @@ It's just another option in devenv.nix:
 
 <img src="/images/env.png" style="width: 700px;"/>
 
+<!--
+# Let’s add some env variables...
 
+It's just another option in devenv.nix:
+
+```
+env = {
+  NODE_ENV = "development";
+  DB_CONNECTION_STRING = "postgres://myuser:pass@127.0.0.1:15432/mydb";
+  NODE_PATH = "./my-app/node_modules";
+};
+
+```
+-->
 
 ---
 layout: two-cols-header
@@ -978,6 +1192,31 @@ There are plenty of predefined ones:
 
 </div>
 
+<!--
+# ...and services,
+
+There are plenty of predefined ones:
+
+
+<div style="font-size: 14px">
+
+```
+ services.postgres = {
+   enable = true;
+   listen_addresses = "127.0.0.1";
+   port = 15432; # We alrady have another postgresql instance running locally.
+   package = pkgs.postgresql_15;
+   initialDatabases = [{ name = "mydb"; schema = ./seeds/database.sql; pass = "pass"; user = "myuser"; }];
+   extensions = extensions: [
+     extensions.postgis
+     extensions.pgvector
+   ];
+   settings.shared_preload_libraries = "vector";
+   initialScript = "CREATE EXTENSION IF NOT EXISTS vector;";
+};
+```
+</div>
+-->
 
 ---
 layout: two-cols-header
@@ -1035,6 +1274,20 @@ We can create arbitrary tasks and define when they run:
 
 <img src="/images/tasks.png" style="width: 700px;"/>
 
+<!--
+### What about database migrations?
+We can create arbitrary tasks and define when they run:
+```
+tasks."app:migrate" = {
+  exec = ''
+      cd my-app
+      npx sequelize db:migrate
+  '';
+  after = [ "devenv:enterShell" ];
+  before = [ "devenv:enterTest" ];
+};
+```
+-->
 
 ---
 layout: section
@@ -1049,7 +1302,7 @@ Doomsday avoided. Our local env is amazing now.
 <br>
 <div class="flex flex-col items-center" style="width:400px; margin: auto;">
 
-<SlidevVideo autoplay loop  style="width: 100%;">
+<SlidevVideo autoplay loop autoreset="click" style="max-height: 400px; width: 100%;">
     <source src="/images/easy.mp4" type="video/mp4">
 </SlidevVideo>
 </div>
@@ -1058,5 +1311,6 @@ Doomsday avoided. Our local env is amazing now.
 Questions?
 </h4>
 
+::bottom::
 
-
+https://devenv.pages.wito.dev/
