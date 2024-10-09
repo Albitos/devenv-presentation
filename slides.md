@@ -47,11 +47,6 @@ layoutClass: gap-16
 
 <img src="/images/photo.jpg" class="photo">
 
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
-
 <style>
 h1 {
   background-color: #2B90B6;
@@ -65,9 +60,19 @@ h1 {
 </style>
 
 
+
+<!--
+1:00
+
+Hello! I'm Witold and I'm a Team Lead at monday.com. 
+I have an obsession with productivity and one of the things that I find the most annoying is setting up a local environment.
+During this talk I will show you how you can quickly do it in a best possible way using Nix and devenv.sh
+ 
+-->
+
 ---
 transition: slide-up
-layout: two-cols
+layout: two-cols-header
 level: 2
 ---
 
@@ -75,7 +80,8 @@ level: 2
 
 It’s about removing all the roadblocks that stop you from working efficiently (also known as: bullsh*t).
 
-The very first thing that you encounter in a new company/project is the local env setup. 
+::left::
+The very first thing that you encounter at a new company/project is the local env setup. 
 
 Especially important when working with Microservices.
 
@@ -83,16 +89,39 @@ But not only - for example, freelancers encounter this as well a lot when switch
 
 Did you ever come back to a project after 5 years?
 
+<v-click>
 I did. 
 
 It. Is. Not. Fun.
+</v-click>
 
-:: right ::
+::right::
 
-<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
+<SlidevVideo v-click="1" autoplay loop autoreset="click" style="max-height: 400px; width: 100%;">
     <source src="/images/blocks-wrecked.mp4" type="video/mp4">
 </SlidevVideo>
 
+<!--
+It’s about removing all the roadblocks that stop you from working efficiently (also known as: bullsh*t).
+
+The very first thing that you encounter at a new company/project is the local env setup. 
+
+It's important to have as little roadblocks as possible
+
+Especially important when working with Microservices.
+
+But not only - for example, freelancers encounter this as well a lot when switching between projects. 
+
+Did you ever come back to a project after 5 years?
+
+<PAUSE + CLICK>
+
+[click] I did. 
+
+It. Is. Not. Fun.
+
+Let's see how it usually looks like:
+-->
 
 ---
 layout: two-cols-header
@@ -102,24 +131,78 @@ layoutClass: gap-x-8 gap-16
 
 # Let’s talk about DevEx
 
-You join a new project. Or even worse, an old one. What do you need to do?
+Just starting a job at a new company?
+
 
 ::left::
 
-Just starting a job at a new company?
+<div style="margin-top:-60px;"/>
 
-> You will need git, docker, docker-compose, node, kubectl, vscode, company dotfiles.
+You will need to set up your machine:
 
-Install tooling (new/old version of node?)
+1. Install general tools: git, docker, etc.
 
-> Actually, it’s 4 different versions of node. And Ruby. And go. Oh, did I mention Scala? <b>It’s a Zoo out there.</b>
+2. Install runtimes / libraries:
+
+<v-clicks>  
+
+   - NodeJS
+
+   - Actually, it’s 4 different versions of node.
+
+   - And Ruby.
+
+   - And Go.
+
+   - Oh, did I mention Scala?
+
+ </v-clicks> 
+
+<v-click><b>It’s a Zoo out there.</b></v-click>
 
 ::right::
 
-<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
+<div style="margin-top:-45px;"/>
+
+<SlidevVideo v-click="6" autoplay loop autoreset="click" style="width: 100%;">
     <source src="/images/madagascar.mp4" type="video/mp4">
 </SlidevVideo>
 
+<style>
+ul li {
+    position: relative;
+    left: 20px;
+}
+ul li p {
+  margin-top: 3px !important;
+  line-height: 1rem;
+}
+b {
+  margin-top: 2rem;
+  display: block;
+}
+</style>
+
+<!--
+<b>Let’s talk about DevEx</b>
+
+Just starting a job at a new company? You will need to set up your machine:
+
+1. Install general tools: git, docker, etc.
+
+2. Install runtimes / libraries:
+
+[click] NodeJS<br> 
+[click] Actually, it’s 4 different versions of node.<br>
+[click] And Ruby.<br>
+[click] And Go.<br>
+[click] Oh, did I mention Scala?<br>
+
+< PAUSE >
+
+[click] <b>It’s a Zoo out there.</b>
+
+-->
 
 ---
 layout: two-cols-header
@@ -129,30 +212,79 @@ layoutClass: gap-x-8
 
 # Let’s talk about DevEx
 
-You join a new project. Or even worse, an old one. What do you need to do?
+You join a new project. Or even worse, an old one. How does that look like?
 
 ::left::
 
+<v-click>
 Oh no, libsass won’t compile due to old Python 
 
-> There’s a docker-compose.yml, we are golden!
+> Found a solution on the company Wiki. 2 hours gone.
 
+</v-click>
+<br>
+<v-click>
 But where do I get the env variables from?
 
 > There’s env.local.example. Copy it and fill in with your values.
 
-It’s outdated… Also, are the database seeds loaded automatically?
+</v-click>
+<br>
+<v-click>
+It’s outdated… 
 
-> NOPE!
+> Asked a coworker. It took until next day as they had meetings.
 
-ALL of that work is unnecessary and a waste of your time. And puts a lot of pressure on new joiners.
+</v-click>
+<br>
+<v-click>
+Also, are the database seeds loaded automatically?
+
+> NOPE! Need to run a script. Another 2 hours gone.
+
+</v-click>
+<br>
+<v-click>
+
+<strong>ALL of that work is unnecessary</strong> and wastes time!
+
+</v-click>
 
 ::right::
 
-<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
-    <source src="/images/aletter.mp4" type="video/mp4">
+<SlidevVideo v-click="5" autoplay loop autoreset="click" style="width: 100%;">
+<source src="/images/aletter.mp4" type="video/mp4">
 </SlidevVideo>
 
+<!--
+3:00
+
+So we have the machine set up.
+
+You join a new project. Or even worse, an old one. 
+
+How does that look like?
+
+[click] Oh no, libsass won’t compile due to old Python 
+> Found a solution on the company Wiki. 2 hours gone.
+
+[click] But where do I get the env variables from?
+
+> There’s env.local.example. Copy it and fill in with your values.
+
+[click] It’s outdated… 
+> Asked a coworker. It took until next day as they had meetings.
+
+[click] Also, are the database seeds loaded automatically?
+> NOPE! Need to run a script. Another 2 hours gone.
+
+[click] <strong>ALL of that work is unnecessary</strong> and wastes time! 
+
+It's <strong>frustrating</strong>
+
+
+
+-->
 
 ---
 layout: two-cols-header
@@ -186,16 +318,43 @@ Coming back after a year or two?
 <v-click>
 Our new team member is using Windows? 
 
-> Oh, we need to rewrite the script
+> <b>Oh come on</b>, we need to rewrite the script
 </v-click>
 
 ::right::
 
-<v-click>
-<SlidevVideo v-click autoplay loop autoreset="click" style="width: 100%;">
+<SlidevVideo v-click="4" autoplay loop autoreset="click" style="width: 100%;">
     <source src="/images/oh-come-on.mp4" type="video/mp4">
 </SlidevVideo>
-</v-click>
+
+
+
+<!--
+
+<strong>Let’s solve it!</strong>: It’s simple, just create a script that installs all the required tools. Right?
+
+[click] This single team is using Scala? Do we want to install Scala for everyone? 
+
+**Problem:** you would need script per team or maintain every setup.
+
+[click] You need two different versions of OpenSSL for different projects? Yeah, we can’t have that 
+
+**Problem:** Handling multiple versions of the same tool is hard
+
+[click] Coming back after a year or two? New OS X has now Python 3, so the script fails 
+
+**Problem:** coming back after some time, the script might not work due to the system changes
+
+< PAUSE >
+
+[click]  Our new team member is using Windows? <b>Oh come on</b>, we need to rewrite the script 
+
+
+**Problem:** It's hard to make sure that a manually written script works correctly everywhere. Every OS handles software installation differently.
+
+< MEM >
+
+-->
 
 ---
 layout: two-cols
@@ -206,7 +365,6 @@ layoutClass: gap-x-8
 # Let’s solve it - attempt #2
 
 Ok, how about containers?
-
 
 <v-click>
 1. Create a Dockerfile per project
@@ -309,6 +467,30 @@ ul {
 </style>
 
 
+<!--
+
+<strong>Let’s solve it - attempt #2</strong>
+
+Ok, how about containers?
+
+[click] 1. Create a Dockerfile per project
+  - Solves the pre-existing libraries / tools issue
+  - No more version conflicts between projects
+
+[click] 2. Install all tools within the container
+
+[click] 3. Create a docker-compose.yml with services
+
+[click] 4. Mount local files as volumes
+  - Now we can use our IDE to edit files directly
+
+[click] 5. Use .env.local + env variables in docker-compose.yml
+
+[click] DONE! Or are we?
+
+-->
+
+
 ---
 layout: two-cols-header
 transition: slide-up
@@ -320,27 +502,60 @@ layoutClass: gap-x-8
 Or are we?
 
 
-1. Now all tools can be used only in the container
-2. If you want them available everywhere, each container needs to have them installed
-3. Adding a tool will require rebuilding everything
-4. If the distribution doesn't contain a package for your tool, you are in for a lot of pain
-5. Docker builds aren't really reproducible
-6. We can't install GUI applications that way
-7. It's not easy to use one's own shell configuration
+<v-click>
+<p>1. Now all tools can be used only in the container</p>
+</v-click>
 
-<!-- TODO: FIXME: improve this slide --->
+<v-click>
+<p>2. If you want them available everywhere, each container needs to have them installed</p>
+</v-click>
+
+<v-click>
+<p>3. Adding a tool will require rebuilding everything</p>
+</v-click>
+
+<v-click>
+<p>4. If the distribution doesn't contain a package for your tool, you are in for a lot of pain</p>
+</v-click>
+
+<v-click>
+<p>5. Docker builds aren't really reproducible</p>
+</v-click>
+
+<v-click>
+<p>6. We can't install GUI applications that way</p>
+</v-click>
+
+<v-click>
+<p>7. It's not easy to use one's own shell configuration</p>
+</v-click>
 
 
 <style>
-ul {
-  padding-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  color: #ffffffaa; 
+br {
+  margin-bottom: 0.5em !important;
+  display: block !important;
 }
 </style>
 
+<!--
 
+
+[click] 1. Now all tools can be used only in the container
+
+[click] 2. If you want them available everywhere, each container needs to have them installed
+
+[click] 3. Adding a tool will require rebuilding everything
+
+[click] 4. If the distribution doesn't contain a package for your tool, you are in for a lot of pain
+
+[click] 5. Docker builds aren't really reproducible
+
+[click] 6. We can't install GUI applications that way
+
+[click] 7. It's not easy to use one's own shell configuration
+
+-->
 
 ---
 layout: section
@@ -397,15 +612,12 @@ What is it?
 
 ::left::
 
-- I will be crucified for this, but basically “npm” for system packages with some really nice extra features:
-reproducible builds
+Basically “npm” for system packages with a few twists:
+- over 100,000 packages available. More than Arch btw.
 - declarative configuration in a single, type-safe format (Nix language)
-- It uses Nix store underneath
-- Over 100,000 packages available. More than Arch btw.
-- Anything that you could apt-get is there: vscode, node, firefox, docker.
+- reproducible builds
+- ability to install multiple versions of the same package
 - There is a whole Linux distribution built around it (NixOS), but we won’t be talking about it. You can read more about it here:
-
- 
 
 <br><br>
 Project website: https://nixos.org
@@ -417,6 +629,25 @@ YouTube VimJoyer NixOS series: [youtube.com/@vimjoyer](https://www.youtube.com/p
 <center>
 <img src="/images/nix-logo.svg" class="nix-logo" style="display: inline; width: 200px;" alt="Nix logo">
 </center>
+
+<!--
+
+
+I will be crucified for this, but basically “npm” with a few twists:
+
+- Over 100,000 packages available. More than Arch btw.: Anything that you could apt-get is there: vscode, node, firefox, docker.
+
+- declarative configuration in a single, type-safe format (Nix language)
+
+- reproducible builds: devenv.lock and flakes
+
+- ability to install multiple versions of the same package: It uses Nix store underneath
+
+- There is a whole Linux distribution built around it (NixOS), but we won’t be talking about it. You can read more about it here:
+
+ 
+-->
+
 
 ---
 layout: two-cols
@@ -480,6 +711,29 @@ Might not be such a bad idea,<br>if you are the only person using it.
 }
 ```
 
+
+<!--
+
+# So how do we use it?
+
+It’s simple:
+
+1. Learn the Nix language
+2. Understand how modules, packages and Flakes work
+3. Create your own Nix flake
+4. Run single shell command:
+   > <code>nix shell .#dev --command 'dev-shell'</code>
+5. Launch your services 
+
+[click] <h4  class="text-center" style="margin-top: 30px;">
+I'm kidding. It's not simple...
+
+Might not be such a bad idea,<br>if you are the only person using it. 
+
+<b>But that’s probably not the case.</b>
+
+
+-->
 
 ---
 layout: two-cols-left
@@ -555,7 +809,12 @@ Some files were automatically created for us: <i>.envrc</i>, <i>devenv.nix</i>, 
 ::right::
 
 <div style="position: relative">
-<Asciinema src="casts/recording.rec" :playerProps="{  controls: false, theme: 'auto/dracula', preload: true, idleTimeLimit: 2}"/>
+
+
+<SlidevVideo autoplay loop autoreset="click" timestamp="4" style="width: 100%;">
+    <source src="/casts/devenv.mp4" type="video/mp4">
+</SlidevVideo>
+
 </div>
 
 ---
@@ -636,7 +895,9 @@ What about bun?
 <br>
 
 <div style="position: relative">
-<Asciinema src="casts/recording.rec" :playerProps="{ startAt: '1:43', autoPlay: false, controls: true, theme: 'auto/dracula', preload: true}"/>
+<SlidevVideo autoplay loop autoreset="click" timestamp="103" style="width: 100%;">
+    <source src="/casts/devenv.mp4#t=103" type="video/mp4">
+</SlidevVideo>
 </div>
 
 <style>
@@ -655,7 +916,24 @@ span {
 }
 </style>
 
+<!--
 
+# Use the config, Luke
+
+Everything you need is in the devenv.nix file
+
+Wait, that’s all? 
+
+> Yes, as long as you want Node.js.
+
+[click] What about bun?
+
+> No problem!
+
+> Now we can execute <span>devenv shell</span> and have everything set up for us.<br><br> 
+> Try executing <span>node --version</span>, <span>bun --version</span> or <span>npm --version</span>
+
+-->
 
 ---
 layout: default
@@ -721,7 +999,17 @@ devenv.sh supports many of them out of the box:
 <img src="/images/hooks.png" style="width: 700px;"/>
 
 
+<!--
 
+# ...and hooks with linters.
+
+devenv.sh supports many of them out of the box:
+- eslint
+- prettier
+- secret detection
+- stylelint
+
+-->
 
 
 ---
@@ -760,7 +1048,8 @@ Doomsday avoided. Our local env is amazing now.
 
 <br>
 <div class="flex flex-col items-center" style="width:400px; margin: auto;">
-<SlidevVideo autoplay loop autoreset="click" class="text-center">
+
+<SlidevVideo autoplay loop  style="width: 100%;">
     <source src="/images/easy.mp4" type="video/mp4">
 </SlidevVideo>
 </div>
