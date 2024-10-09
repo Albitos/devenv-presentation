@@ -16,5 +16,6 @@
   },
   "addons": [
     "slidev-addon-asciinema"
-  ]
+  ],
+  "packageManager": "yarn@4.5.0"
 }
